@@ -1,21 +1,32 @@
 html, body {
 	height: 100%;
+	width: 100%;
 	margin: 0;
 	padding: 0;
-	overflow: hidden; // hide vertical
+	overflow: hidden;
 	backface-visibility: hidden;
 }
 body {
-	background-repeat: no-repeat;
+/*	background-repeat: no-repeat;
 	background-size: contain 33%;
 	background-position: center top;
-	background-attachment: fixed;
-	background-color: #F5AB35;
-	background-image: url(http://localhost/WordPressfolder/wp-includes/images/background.png);				
+	background-attachment: fixed;*/
+	/*background-image: url(http://localhost/WordPressfolder/wp-includes/images/background.png);				*/
+	background: url("wallpaper.jpg") center center;
+	background-size: cover;
 }
 
 div{
 	z-index: 1;
+}
+
+#contentHolder{
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(245,171,53,0.8);
+	z-index: -5;
+	position: fixed;
 }
 
 
@@ -28,33 +39,35 @@ div{
 	margin-right: auto;
 	color: #ccc;
 	height: 50px;
-	width: 300px;
+	width: 400px;
 	clear: both;
    	border-radius: 5px;
    	overflow: hidden;
 	border: 1px solid brown;
+
+}
+
+#inputHolder{
+	display: block;
+	float: left;
+	display: block;
+	height: 100%;
+	width: 50%;
+	overflow: hidden;
 }
 
 
 input[type="text"] {
-	display: block;
-	padding: 10px;
+	width: 100%;
+	height: 100%;
 	font-family: "Oswald";
 	font-weight: 200;
 	letter-spacing: 1px;
 	font-size: 18px;
 	appearance: none;
-	box-shadow: none;
-	border-radius: none;
-	float: left;
-	display: block;
-	height: 100%;
-	width: 140px;
-	border: 0;
-	padding: 0;
-	padding-left: 10px;
-	margin: 0;
 	color: #4099FF;
+	padding-left: 10px;
+	transform: translateY(-2px);
 }
 
 input[type="text"]:focus {
@@ -106,11 +119,11 @@ img.screen {
 	margin: auto;
    	border-radius: 5px;
    	overflow: hidden;
-   	box-shadow: 2px 2px 20px 2px #D35400;
    	box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.28);
 	width: 800px;
 	max-width: 90%;
 	height: 600px;
+	border: 2px solid brown;
 }
 
 .zone{
@@ -131,9 +144,11 @@ img.screen {
 	margin: auto;
 	text-decoration: uppercase;
 	transition: 0.2s linear;
+	letter-spacing: 1px;
 }
 #zone1 {
 	background-color: #EF4836;
+	border-radius: 3px 3px 0 0;
 }
 #zone1 > p {
 	color: #C0392B;
@@ -149,14 +164,34 @@ img.screen {
 }
 #zone3 > p {
 	color: #446CB3;
+	border-radius: 0 0 3px 3px;
+}
+
+#birdCage{
+	width: 100px;
+	height: 100px;
+	background-color: #D35400;
+	border-radius: 50%;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-flex-align: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: -3;
+	transition: 0.2s linear;
+	border: 1px solid brown;
+
 }
 
 #bird{
-	position: fixed;
-	right: 10px;
-	top: 10px;
-	font-size: 100px;
-	color: #D35400;
+	font-size: 70px;
+	z-index: -3;
+	color: #F5AB35;
+	transform: translateY(2px);
 	transition: 0.2s linear;
 }
 
@@ -180,11 +215,18 @@ img.screen {
 	position: fixed;
 	width: 1000px;
 	height: 1000px;
-	bottom: -480px;
+	bottom: -500px;
 	left: -200px;
 	background-color: #E87E04;
 	border-radius: 50%;
+	border: 2px solid brown;
 	z-index: -2;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-flex-align: center;
+	-webkit-justify-content: center;
+	justify-content: center;
 }
 #moodi{
 	display: block;
@@ -201,8 +243,15 @@ img.screen {
 
 @media screen and (max-width: 1000px){
 
-	#bird, #moodi{
+	#moodi{
 		color: transparent;
+	}
+	#bird{
+		color: transparent;
+	}
+	#birdCage{
+		background-color: transparent;
+		border: none;
 	}
 }
 
@@ -210,5 +259,12 @@ img.screen {
 
 	.zone > p{
 		font-size: 50px;
+	}
+}
+
+@media screen and (max-width: 440px){
+
+	#Users{
+		width: 90%;
 	}
 }

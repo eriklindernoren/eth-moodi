@@ -139,6 +139,7 @@
 		</script>
 	</head>
 	<body>
+		<div id="contentHolder"></div>
 		<img src="http://localhost/WordPressfolder/wp-includes/images/billboard.png" class="screen">
 		<div class="zones">
 			<div id="zone1" class="zone">
@@ -152,13 +153,15 @@
 			</div>
 		</div>
 		<div id="Users">
-			<input type="text" id="twitterUser" name="twitterUser" placeholder="@twitteruser" onfocus="this.placeholder = ''" onblur="this.placeholder ='@twitteruser'" name="Email" id="Email">
+			<div id="inputHolder">
+				<input type="text" id="twitterUser" name="twitterUser" placeholder="@twitteruser" onfocus="this.placeholder = ''" onblur="this.placeholder ='@twitteruser'" name="Email" id="Email">
+			</div>
 			<a id="addUser">
 				<p>Add User</p>
 			</a>
 		</div>
 		<div id="dot"></div>
-		<p id="moodi">MOODIWALL</p>
-		<i id="bird" class="fa fa-twitter"></i>
+		<p id="moodi">MOODiWALL</p>
+		<div id="birdCage"><i id="bird" class="fa fa-twitter"></i></div>
 	</body>
 </html>
