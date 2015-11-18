@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Display</title>		
+		<style>
+			body {
+				background-attachment: fixed;
+				background-color: #403B38;
+				color:#fff;
+			}
+			#display{
+				font-size:x-large;
+				width:*;
+				margin:20px  20px 0px 20px;
+				padding:10px;
+				background-color:#666;
+				border-style: solid;
+				border-width: 21px;
+				border-color:#333;
+			}
+			
+			.twitterImg{
+				width:100px;
+				height:100px;
+				padding:10px;
+				display:inline-block;
+				text-align:justify;
+				vertical-align: text-top;
+			}
+			
+
+		</style>
+		<script src="http://localhost/WordPressfolder/wp-includes/js/jquery.min.js"></script>		
+		<script src="http://localhost/WordPressfolder/wp-includes/js/jquery-ui.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			$(document).ready(function() {
+				var url = "http://localhost";
+				var socket = io.connect(url + ':5000');
+
+				// on connection to server, ask for display's name with an anonymous callback
+				socket.on('connect', function() {
+					// call the server-side function 'adddisplay' and send one parameter (value of prompt)
+					//socket.emit('adddisplay', prompt("What's your name?"));
+					socket.emit('adddisplay', getParam('display'));
+				});
+
+				socket.on('displayData', function(body) {
+					console.log(body);
+					 $('#display').html('');
+					for (var entery in body) {
+						
+					 $('#display').append('<img  class="twitterImg" src="' + body[entery]['user']['profile_image_url'] + '">' + body[entery]['user']['name'] + " : " + body[entery]["text"]+"<br>");
+					}
+				});
+			
+
+
+				function getParam(name) {
+					name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+					var regexS = "[\\?&]" + name + "=([^&#]*)";
+					var regex = new RegExp(regexS);
+					var results = regex.exec(window.location.href);
+					if (results == null)
+						return "";
+					else
+						return results[1];
+				}
+
+			});
+		</script>
+	</head>
+	<body>
+		
+		<div id="display">
+			
+		</div>
+		<div style="text-align:center">
+			<img src="http://localhost/WordPressfolder/wp-includes/images/stand.png" class="screen">
+		</div>
+		
+
+	</body>
+</html>

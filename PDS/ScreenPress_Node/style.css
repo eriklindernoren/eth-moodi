@@ -1,0 +1,214 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden; // hide vertical
+	backface-visibility: hidden;
+}
+body {
+	background-repeat: no-repeat;
+	background-size: contain 33%;
+	background-position: center top;
+	background-attachment: fixed;
+	background-color: #F5AB35;
+	background-image: url(http://localhost/WordPressfolder/wp-includes/images/background.png);				
+}
+
+div{
+	z-index: 1;
+}
+
+
+#Users {
+	position: fixed;
+	bottom: 45px;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	color: #ccc;
+	height: 50px;
+	width: 300px;
+	clear: both;
+   	border-radius: 5px;
+   	overflow: hidden;
+	border: 1px solid brown;
+}
+
+
+input[type="text"] {
+	display: block;
+	padding: 10px;
+	font-family: "Roboto";
+	font-weight: 300px;
+	font-size: 18px;
+	appearance: none;
+	box-shadow: none;
+	border-radius: none;
+	float: left;
+	display: block;
+	height: 100%;
+	width: 140px;
+	border: 0;
+	padding: 0;
+	padding-left: 10px;
+	margin: 0;
+	color: #4099FF;
+}
+
+input[type="text"]:focus {
+	outline: none;
+}
+
+::-webkit-input-placeholder {
+	font-family: "Oswald";
+	font-size: 18px;
+	font-weight: 300;
+    color: #4099FF;
+    transform: translateY(-3px);
+    letter-spacing: 1px;
+}
+
+
+#addUser{
+	float: left;
+	background-color: #D35400;
+	height: 100%;
+	width: 50%;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-flex-align: center;
+}
+
+#addUser:hover > p{
+	color: #E87E04;
+}
+
+#addUser > p{
+	color: white;
+	font-family: "Oswald";
+	font-weight: 300;
+	margin: auto;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+img.screen {
+	width: 33%;
+	min-width: 300px;
+	max-width: 400px;
+}
+.zones {
+	text-align: center;
+	margin: auto;
+   	border-radius: 5px;
+   	overflow: hidden;
+   	box-shadow: 2px 3px 10px 1px #D35400;
+	width: 800px;
+	max-width: 90%;
+	height: 600px;
+}
+
+.zone{
+	position: relative;
+	height: 200px;
+	width: 100%;
+	margin: auto;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	-webkit-flex-align: center;
+	cursor: default;
+}
+.zone > p{
+	font-family: "Oswald";
+	font-weight: 300;
+	font-size: 70px;
+	margin: auto;
+	text-decoration: uppercase;
+	transition: 0.2s linear;
+}
+#zone1 {
+	background-color: #EF4836;
+}
+#zone1 > p {
+	color: #F1A9A0;
+}
+#zone2 {
+	background-color: #26A65B;
+}
+#zone2 > p {
+	color: #87D37C;
+}
+#zone3 {
+	background-color: #3498DB;
+}
+#zone3 > p {
+	color: #89C4F4;
+}
+
+#bird{
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	font-size: 100px;
+	color: #D35400;
+	transition: 0.2s linear;
+}
+
+.xicon {
+	margin-top: 4px;
+	position: absolute;
+	margin-left: -17px;
+	color: #FFF;
+	font: message-box;
+	text-decoration: none;
+}
+.xicon:hover {
+	background-color: #fff;
+	color: #000;
+	width: 13px;
+	height: 20px;
+	text-align: center;
+}
+
+#dot{
+	position: fixed;
+	width: 1000px;
+	height: 1000px;
+	bottom: -480px;
+	left: -200px;
+	background-color: #E87E04;
+	border-radius: 50%;
+	z-index: -2;
+}
+#moodi{
+	display: block;
+	position: fixed;
+	bottom: -180px;
+	left: 5px;
+	font-family: "Oswald";
+	font-weight: 300;
+	font-size: 150px;
+	color: #D35400;
+	z-index: -1;
+	transition: 0.2s linear;
+}
+
+@media screen and (max-width: 1000px){
+
+	#bird, #moodi{
+		color: transparent;
+	}
+}
+
+@media screen and (max-width: 600px){
+
+	.zone > p{
+		font-size: 50px;
+	}
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Simulator</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<script src="http://localhost/WordPressfolder/wp-includes/js/jquery.min.js"></script>		
+		<script src="http://localhost/WordPressfolder/wp-includes/js/jquery-ui.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+		<script>
+			$(document).ready(function() {
+				var url = "http://localhost";
+				var socket = io.connect(url + ':5000');
+
+				// on connection to server, ask for display's name with an anonymous callback
+				socket.on('connect', function() {
+					// call the server-side function 'addsimulator' and send one parameter (value of prompt)
+					//socket.emit('addsimulator', prompt("What's your name?"));
+					socket.emit('addsimulator', getParam('display'));
+				});
+
+				var x = null;
+				var array = {};
+				array["zone1"] = [];
+				array["zone2"] = [];
+				array["zone3"] = [];
+				// console.log(array);
+
+				function updateZones() {
+
+					var myJsonString = JSON.stringify(array);
+					console.log(myJsonString);
+					socket.emit('updateZones', myJsonString);
+				}
+
+
+				$("#droppable, #zone1, #zone2, #zone3").droppable({
+					accept : '.drag',
+					activeClass : "drop-area",
+					drop : function(e, ui) {
+						if ($(ui.draggable)[0].id != "") {
+
+							x = ui.helper.clone();
+							// ui.helper.remove();
+							x.draggable({
+								helper : 'original',
+								cursor : 'move',
+								// containment: '#droppable, #zone1, #zone2, #zone3',
+								revert : "invalid",
+								tolerance : 'fit',
+
+							});
+							x.addClass('remove');
+						}
+
+						// alert(ui.draggable.attr('id') + ' was dropped from ' + ui.draggable.parent().attr('id')+ "to" + $(e.target).attr('id'));
+
+						// removing the item from the old zone and adding it to the new one
+						for (var entery in array) {
+							for (var i = array[entery].length - 1; i >= 0; i--) {
+								if (array[entery][i] === ui.draggable.attr('id')) {
+									array[entery].splice(i, 1);
+								}
+							}
+						}
+						array[$(e.target).attr('id')].push(ui.draggable.attr('id'));
+						console.log(ui.draggable.attr('id') + ' was dropped to ' + $(e.target).attr('id'));
+						console.log(array);
+						updateZones();
+						/*
+						$("#zone3").children(".drag").each(function() {
+
+						array.push($(this).attr('id'));
+						alert($(this).attr('id'));
+						});*/
+
+						// $("#zone3").children().remove();
+					}
+				});
+
+				//Adding a new user
+				$("#addUser").click(function() {
+					console.log($("#twitterUser").val());
+
+					if ($("#twitterUser").val() != '' && $("#twitterUser").val() != '@user') {
+						socket.emit('addUser', $("#twitterUser").val());
+					}
+
+				});
+
+				//Get the user photo
+				socket.on('userProfile', function(body) {
+					// alert(body[0]['user']['profile_image_url']);
+					$("#Users").append("<br><span id=\"" + $("#twitterUser").val() + "\" class=\"drag\"> <img src=\"" + body[0]['user']['profile_image_url'] + "\" width=\"80px\" height=\"80px\" /> <span><a href=\"Javascript:void(0)\" class=\"xicon delete\" title=\"Remove\">X</a></span></span>");
+					$("#twitterUser").val("");
+
+					//Make element draggable
+					$(".drag").draggable({
+						helper : 'original',
+						revert : "invalid",
+						cursor : 'move',
+						tolerance : 'fit'
+						// revert : true
+					});
+
+					// deleting a user
+					$('.delete').on('click', function() {
+						$(this).parent().parent('span').remove();
+						// alert($(this).parent().parent('span').attr('id'));
+						var targetElement = $(this).parent().parent('span').attr('id');
+						// removing the item from the old zone and adding it to the new one
+						for (var entery in array) {
+							for (var i = array[entery].length - 1; i >= 0; i--) {
+								if (array[entery][i] === targetElement) {
+									array[entery].splice(i, 1);
+								}
+							}
+						}
+						console.log(array);
+						updateZones();
+					});
+
+				});
+				function getParam(name) {
+					name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+					var regexS = "[\\?&]" + name + "=([^&#]*)";
+					var regex = new RegExp(regexS);
+					var results = regex.exec(window.location.href);
+					if (results == null)
+						return "";
+					else
+						return results[1];
+				}
+
+			});
+		</script>
+	</head>
+	<body>
+		<img src="http://localhost/WordPressfolder/wp-includes/images/billboard.png" class="screen">
+		<div class="zones">
+			<div id="zone1" class="zone">
+				<p>Good Times</p>
+			</div>
+			<div id="zone2" class="zone">
+				<p>What's New</p>
+			</div>
+			<div id="zone3" class="zone">
+				<p>Trending Tweets</p>
+			</div>
+		</div>
+		<div id="Users">
+			<input type="text" id="twitterUser" name="twitterUser" placeholder="Twitter User" onfocus="this.placeholder = ''" onblur="this.placeholder ='Twitter User'" name="Email" id="Email">
+			<a id="addUser">
+				<p>Add User</p>
+			</a>
+		</div>
+		<div id="dot"></div>
+		<p id="moodi">MOODIWALL</p>
+		<i id="bird" class="fa fa-twitter"></i>
+	</body>
+</html>
