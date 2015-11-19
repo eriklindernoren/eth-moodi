@@ -3,34 +3,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Display</title>		
-		<style>
-			body {
-				background-attachment: fixed;
-				background-color: #403B38;
-				color:#fff;
-			}
-			#display{
-				font-size:x-large;
-				width:*;
-				margin:20px  20px 0px 20px;
-				padding:10px;
-				background-color:#666;
-				border-style: solid;
-				border-width: 21px;
-				border-color:#333;
-			}
-			
-			.twitterImg{
-				width:100px;
-				height:100px;
-				padding:10px;
-				display:inline-block;
-				text-align:justify;
-				vertical-align: text-top;
-			}
-			
-
-		</style>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 		<script src="http://localhost/WordPressfolder/wp-includes/js/jquery.min.js"></script>		
 		<script src="http://localhost/WordPressfolder/wp-includes/js/jquery-ui.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
@@ -72,14 +47,13 @@
 		</script>
 	</head>
 	<body>
-		
-		<div id="display">
-			
-		</div>
+		<div id="bgFilter"></div>
+		<div id="display"></div>
 		<div style="text-align:center">
 			<img src="http://localhost/WordPressfolder/wp-includes/images/stand.png" class="screen">
 		</div>
-		
-
+		<div class="dot lowerLeftDot"></div>
+		<p class="dotText moodi">MOODIWALL</p>
+		<p class="dotText labelText">Display</p>
 	</body>
 </html>
